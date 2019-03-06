@@ -22,6 +22,9 @@
     </div>
 </template>
 
+
+
+
 <style>
 #Register{
     width: 300px;
