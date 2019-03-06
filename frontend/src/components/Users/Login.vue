@@ -1,24 +1,30 @@
+<!--Código correspondiente a la creación de los elementos que se encontraran en la página-->
 <template>
     <div class="login_form" id="login">
         <h2 class="login-heading">Login</h2>
         <form action="#" @submit.prevent="login">
 
             <div class="form_control">
+                <!--Se crea el campo de texto para que se indique el usuario o email, se indica que tipo es la información y se guarda  en un v-model-->
                 <label for="email">Username/Email</label>
                 <input type="email" name="username" id="username" class="login_input" v-model="username">
             </div>
-
+            
             <div class="form_control">
+                <!--Se crea el campo de texto para que se indique la contraseña del usario, se indica que tipo es la información y se guarda  en un v-model-->
                 <label for="password">password</label>
                 <input type="password" name="password" id="password" class="login_input" v-model="password">   
             </div>
 
             <div class="form_control">
+                <!--Se crea el boton para poder logearse e ingresar-->
                 <v-btn color="blue"  type="submit" class="btn_submit">Login</v-btn>
             </div>
         </form>
     </div>
 </template>
+
+<!--Se indica como se guarda y devuelve la información que el usuario ha guardado. Esta todo el código correspondiente a JavaScript-->
 <script>
 export default {
     name: 'login',
@@ -28,6 +34,7 @@ export default {
             password:'',
         }
     }, 
+    //Se ingresan los métodos que se van a usar la información que se ha ingresado.
     methods: {
         login (){
             this.$main.dispatch('retrieveToken', {
@@ -39,6 +46,7 @@ export default {
 }
 </script>
 
+<!--Código que se encarga de manejar el estilo de la página y los elementos que estan en ella-->
 <style>
 #login{
     width: 300px;
