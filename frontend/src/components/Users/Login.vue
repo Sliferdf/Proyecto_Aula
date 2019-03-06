@@ -30,7 +30,7 @@ export default {
     }, 
     methods: {
         login (){
-            this.$store.dispatch('retrieveToken', {
+            this.$main.dispatch('retrieveToken', {
                 username: this.username,
                 password: this.password,
             })
@@ -41,32 +41,35 @@ export default {
 
 <style>
 #login{
-    margin-left: 30%;
-    width: 50%;
+    width: 300px;
     height: 50%;
+    margin-left: 40%;
 }
 .form_control{
     padding: 10px;
-    width: 80%;
+    width: 100%;
     height: 80%;
 }
 .btn_submit{
     width: 80%;
     height: 40px;
-
 }
 
 .login_input{
     border: 1px;
     width: 100%;
     height: 40px;
-    
+    border: solid 1px;
+    border-radius: 10px;
 }
 
-/*.login_form{
-    align-items:center;
-    background-color: aqua;
-}*/
+h2 {
+    align-content: left;
+}
 
+.login_form{
+    border: solid 1px;
+    border-radius: 10px;
+}
 </style>
 

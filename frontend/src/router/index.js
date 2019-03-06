@@ -6,6 +6,7 @@ import AddCoworking from '@/components/Coworking/AddCoworking'
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Login from '@/components/Users/Login'
+import Register from '@/components/Users/Register'
 import axios from 'axios'
 
 
@@ -32,6 +33,12 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login,
+    
+    }, 
+    {
+      path: '/Register',
+      name: 'Register',
+      component: Register,
     
     }, 
   ],
