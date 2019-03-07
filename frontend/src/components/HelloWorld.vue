@@ -3,7 +3,7 @@
   <div class="hello">
     <v-app>
       <!--Se creea la barra de herraminetas que el usario manejara-->
-      <v-toolbar dark color="primary">
+      <v-toolbar dark color="primary" fixed="true">
       <v-toolbar-side-icon></v-toolbar-side-icon>
 
       <!--Se crea el título de la barra de hheramientas, con un icono -->
