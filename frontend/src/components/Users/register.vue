@@ -1,3 +1,4 @@
+
 <!--Código correspondiente a la creación de los elementos que se encontraran en la página-->
 <template>
     <div class="register_form" id="register" >
@@ -47,9 +48,7 @@ export default {
         return {
         username: [],
         nuevaUsername: '',
-        email: [],
         nuevaEmail: '',
-        password: [],
         nuevaPassword: '',
         }
     },
@@ -61,12 +60,16 @@ export default {
                 correo: this.nuevaEmail,
                 pass: this.nuevaPassword
             });
+            localStorage.setItem('email',
+                JSON.stringify(this.nuevaEmail));
+            localStorage.setItem('password',
+                JSON.stringify(this.nuevaPassword));                
             this.nuevaUsername = '';
             this.nuevaEmail = '';
             this.nuevaPassword = '';
             //Se guardar a los elementos en la base de datos local
-            localStorage.setItem('username',
-                JSON.stringify(this.username));
+            localStorage.setItem('datos',
+                JSON.stringify(this.username));  
          },                
 
         created: function (index) {
