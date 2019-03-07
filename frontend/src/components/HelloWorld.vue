@@ -19,12 +19,12 @@
         <v-icon>Catalog</v-icon>
       </v-btn>
   
-      <v-btn icon>
-        <v-icon>apps</v-icon>
+      <v-btn icon >
+        <v-icon >apps</v-icon>
       </v-btn>
   
-      <v-btn icon>
-        <v-icon>person</v-icon>
+      <v-btn icon to="/login">
+        <v-icon >person</v-icon>
       </v-btn>
     </v-toolbar>
 
