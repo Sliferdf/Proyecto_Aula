@@ -7,8 +7,6 @@ import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Login from '@/components/Users/Login'
 import Register from '@/components/Users/Register'
-import axios from 'axios'
-
 
 Vue.use(Router)
 Vue.use(Vuetify, {
@@ -42,23 +40,6 @@ export default new Router({
     
     }, 
   ],
-  
-  actions: {
-    retrieveToken(contex, credentials){
-      axios.post('/login',{
-        username: credentials.username,
-        password: credentials.password,
-      })
-      .then(response => {
-        console.log(response);
-      })
-
-      .catch(error =>{
-        console.log(error)
-      })
-    },
-  
-  }
 
 })
 
