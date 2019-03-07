@@ -6,17 +6,17 @@
 
             <div class="form_control">
                 <!--Se crea el campo de texto para que se indique el usuario o email, se indica que tipo es la información y se guarda  en un v-model-->
-                <v-text-field label="Username/Email" type="email" name="username" id="username" class="login_input" v-model="username"></v-text-field>
+                <v-text-field label="Username/Email" type="email" id="username" class="login_input" v-model="username"></v-text-field>
             </div>
             
             <div class="form_control">
                 <!--Se crea el campo de texto para que se indique la contraseña del usario, se indica que tipo es la información y se guarda  en un v-model-->
-                <v-text-field label="Password" type="password" name="username" id="username" class="login_input" v-model="password"></v-text-field>
+                <v-text-field label="Password" type="password" id="username" class="login_input" v-model="password"></v-text-field>
             </div>
 
             <div class="form_control">
                 <!--Se crea el boton para poder logearse e ingresar-->
-                <v-btn color="blue"  type="submit" class="btn_submit">Login</v-btn>
+                <v-btn black color="blue"  type="submit" class="btn_submit" @click="login">Login</v-btn>
             </div>
         </form>
     <div class="nav">
@@ -30,22 +30,36 @@
 
 <!--Se indica como se guarda y devuelve la información que el usuario ha guardado. Esta todo el código correspondiente a JavaScript-->
 <script>
+import Swal from 'sweetalert2'
+
 export default {
     name: 'login',
     data(){
         return {
-            username: '',
-            password:'',
+        username: '',            
+        password: '',
         }
     }, 
     //Se ingresan los métodos que se van a usar la información que se ha ingresado.
-    methods: {
-        login (){
-            this.$main.dispatch('retrieveToken', {
-                username: this.username,
-                password: this.password,
-            })
-        }
+    methods: {      
+        login: function (){
+            if (this.username == JSON.parse(localStorage.getItem('email')) && this.password== JSON.parse(localStorage.getItem('password'))) {
+                 Swal.fire({
+                    title: 'Estás registrado!',
+                    text: 'Puedes ingresar',
+                    type: 'success',
+                    confirmButtonText: 'Redirigir'
+                })
+            }
+            else{
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Aún no te encuentras registrado',
+                    type: 'error',
+                    confirmButtonText: 'Reintentar'
+                })
+            }
+        },  
     }
 }
 </script>
