@@ -6,14 +6,12 @@
 
             <div class="form_control">
                 <!--Se crea el campo de texto para que se indique el usuario o email, se indica que tipo es la información y se guarda  en un v-model-->
-                <label for="email">Username/Email</label>
-                <input type="email" name="username" id="username" class="login_input" v-model="username">
+                <v-text-field label="Username/Email" type="email" name="username" id="username" class="login_input" v-model="username"></v-text-field>
             </div>
             
             <div class="form_control">
                 <!--Se crea el campo de texto para que se indique la contraseña del usario, se indica que tipo es la información y se guarda  en un v-model-->
-                <label for="password">password</label>
-                <input type="password" name="password" id="password" class="login_input" v-model="password">   
+                <v-text-field label="Password" type="password" name="username" id="username" class="login_input" v-model="password"></v-text-field>
             </div>
 
             <div class="form_control">
@@ -21,6 +19,12 @@
                 <v-btn color="blue"  type="submit" class="btn_submit">Login</v-btn>
             </div>
         </form>
+    <div class="nav">
+        <router-link to="/">Ir al inicio</router-link>
+    </div>
+    <div class="nav">
+        <router-link to="/register">¿Aún no estás registrado? Registrate desde aquí</router-link>
+    </div>      
     </div>
 </template>
 
@@ -67,17 +71,11 @@ export default {
     border: 1px;
     width: 100%;
     height: 40px;
-    border: solid 1px;
-    border-radius: 10px;
 }
 
 h2 {
     align-content: left;
 }
 
-.login_form{
-    border: solid 1px;
-    border-radius: 10px;
-}
 </style>
 
