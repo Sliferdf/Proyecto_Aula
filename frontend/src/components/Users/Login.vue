@@ -6,17 +6,37 @@
 
             <div class="form_control">
                 <!--Se crea el campo de texto para que se indique el usuario o email, se indica que tipo es la información y se guarda  en un v-model-->
-                <v-text-field label="Username/Email" type="email" id="username" class="login_input" v-model="username"></v-text-field>
+                <v-text-field 
+                v-model="username"
+                :error-messages="userNameError" 
+                id="username" 
+                type="email"
+                class="login_input" 
+                label="Username/Email"
+                required 
+                @input="$v.username.$touch()"
+                @blur="$v.username.$touch()"
+                ></v-text-field>
             </div>
             
             <div class="form_control">
                 <!--Se crea el campo de texto para que se indique la contraseña del usario, se indica que tipo es la información y se guarda  en un v-model-->
-                <v-text-field label="Password" type="password" id="username" class="login_input" v-model="password"></v-text-field>
+                <v-text-field 
+                v-model="password" 
+                :error-messages="passwordError"
+                label="Password" 
+                type="password"
+                class="login_input" 
+                id="username" 
+                required
+                @input="$v.password.$touch()"
+                @blur="$v.password.$touch()"
+                ></v-text-field>
             </div>
 
             <div class="form_control">
                 <!--Se crea el boton para poder logearse e ingresar-->
-                <v-btn black color="blue"  type="submit" class="btn_submit" @click="login">Login</v-btn>
+                <v-btn black color="blue"  type="submit" class="btn_submit" @click="submit">Login</v-btn>
             </div>
         </form>
     <div class="nav">
@@ -31,17 +51,44 @@
 <!--Se indica como se guarda y devuelve la información que el usuario ha guardado. Esta todo el código correspondiente a JavaScript-->
 <script>
 import Swal from 'sweetalert2'
+import { validationMixin } from 'vuelidate'
+import { required, email} from 'vuelidate/lib/validators'
 
 export default {
-    name: 'login',
-    data(){
-        return {
-        username: '',            
-        password: '',
+    mixins: [validationMixin], 
+    validations: {
+        username: { required, email},
+        password: {required}
+    },
+    data: () => ({
+        username: '',
+        password: ''
+    }),
+    computed: {
+        userNameError() {
+            const errors = []
+            if (!this.$v.username.$dirty) return errors
+            !this.$v.username.required && errors.push("El email es requerido")
+            !this.$v.username.email && errors.push("El email debe de ser valido")
+            return errors
+        },
+        passwordError(){
+            const errors = []
+            if (!this.$v.password.$dirty) return errors
+            !this.$v.password.required && errors.push("La contraseña  es requerida")
+            return errors
         }
-    }, 
+    },
     //Se ingresan los métodos que se van a usar la información que se ha ingresado.
-    methods: {      
+    methods: {
+        submit () {
+            this.$v.touch()
+        },
+        clear() {
+            this.$v.$reset()
+            this.$v.username = ''
+            this.$v.password = ''
+        },
         login: function (){
             if (this.username == JSON.parse(localStorage.getItem('email')) && this.password== JSON.parse(localStorage.getItem('password'))) {
                  Swal.fire({
@@ -59,8 +106,15 @@ export default {
                     confirmButtonText: 'Reintentar'
                 })
             }
-        },  
-    }
+        },
+    },
+    name: 'login',
+    /** data(){
+        return {
+        username: '',            
+        password: '',
+        }
+    }, */
 }
 </script>
 
