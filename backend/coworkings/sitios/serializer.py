@@ -7,3 +7,5 @@ class SitiosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sitios
         fields = '__all__'
+
+        
