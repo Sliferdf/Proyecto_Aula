@@ -183,14 +183,13 @@ export default {
 
     postCoworking() {
       const path = "http://127.0.0.1:8000/api/v1.0/sitios/";
-      axios
-        .post(path, this.cards)
+
+      axios({
+        method: "post",
+        data: cards
+      })
         .then(response => {
           console.log(response);
-          this.cards.name1 = response.data.nombre;
-          this.cards.address1 = response.data.direccion;
-          this.cards.price1 = response.data.precio;
-          this.cards.calification1 = reponse.data.calificacion;
         })
         .catch(error => {
           console.log(error);
