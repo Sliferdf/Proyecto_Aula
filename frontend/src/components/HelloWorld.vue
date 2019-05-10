@@ -111,7 +111,6 @@
     >
     <!--Se pasa toda la información que se debe mostrar al usuario-->
     <template v-slot:items="props">
-      <td>{{props.item.nombre}}</td>
       <td class="text-xs-right">{{ props.item.nombre }}</td>
       <td class="text-xs-right">{{ props.item.direccion }}</td>
       <td class="text-xs-right">{{ props.item.precio }}</td>
@@ -137,6 +136,7 @@
 
 <!--Modelo para el retorno de los datos guardados, métodos. Todos los códigos correspondientes a JavaScript-->
 <script>
+import axios from 'axios';
 export default {
   name: 'HelloWorld',
   data () {
@@ -157,31 +157,31 @@ export default {
         {text: 'Calificacion', value: 'calificacion'},
         {text:'Accciones', value: 'acciones'}
         ],
-        coworks : [
-          {
-            nombre: 'Konkafe',
-            direccion: 'Poblado',
-            precio: '200000',
-            calificacion: 5
-          },
-          {
-            nombre: 'SoloPola',
-            direccion: 'Envigado',  
-            precio: '300000',
-            calificacion: 4.5
-  
-          }
-        ]
+        coworks : []
     }
   },
   methods: {
+
     remove(item){
       this.chips.splice(this.chips.indexOf(item), 1)
       this.chips = [...this.chips]
+    },
 
+    getCoworkings(){
+      const path =  'http://127.0.0.1:8000/api/v1.0/sitios/'
+      axios.get(path).then((response) =>{
+        this.coworks= response.data
+      })
+      .catch((error) => {
+        console.log(error);
+      })
     }
-
   },
+
+  created() {
+    this.getCoworkings()
+  },
+
   computed: {
     formTitle(){
         return this.editedText === -1 ? 'New coworking' : 'Edit Coworking'

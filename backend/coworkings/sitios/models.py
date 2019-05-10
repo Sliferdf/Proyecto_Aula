@@ -6,4 +6,4 @@ class Sitios(models.Model):
     direccion = models.CharField(max_length=50)
     precio = models.IntegerField(max_length=50)
     calificacion = models.IntegerField(max_length=50)
-    serviciosP = models.CharField(max_length=50)
+
