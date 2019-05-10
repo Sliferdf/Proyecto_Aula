@@ -60,7 +60,11 @@
                   </v-flex>
 
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="cards.direccion" :rules="[rules.required]" label="Direccion"></v-text-field>
+                    <v-text-field
+                      v-model="cards.direccion"
+                      :rules="[rules.required]"
+                      label="Direccion"
+                    ></v-text-field>
                   </v-flex>
 
                   <v-flex xs12 sm6 md4>
@@ -184,15 +188,25 @@ export default {
     postCoworking() {
       const path = "http://127.0.0.1:8000/api/v1.0/sitios/";
       axios({
-      method: 'post',
-      url: path,
-      data: this.cards
-})
+        method: "post",
+        url: path,
+        data: this.cards
+      })
         .then(response => {
           console.log(response);
+          Swal.fire({
+            title: "Creado!",
+            type: "success",
+            confirmButtonText: "Volver"
+          });
         })
         .catch(error => {
           console.log(error);
+            Swal.fire({
+            title: "Hubo un error en la creación, verifica los campos",
+            type: "error",
+            confirmButtonText: "Volver"
+          });
         });
     }
   },

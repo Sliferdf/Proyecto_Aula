@@ -7,7 +7,7 @@
       <!--Se crea la caja de texto para que se ingrese el nombre de usuario-->
       <div class="form_control">
         <v-text-field
-          v-model="nuevaUsername"
+          v-model="nuevo.name"
           :error-messages="newUserNameError"
           :counter="30"
           label="Name"
@@ -21,7 +21,7 @@
       <!--Se crea la caja de texto para que se ingrese el email del usuario-->
       <div class="form_control">
         <v-text-field
-          v-model="nuevaEmail"
+          v-model="nuevo.email"
           :error-messages="newEmailError"
           label="Email"
           type="email"
@@ -34,7 +34,7 @@
       <!--Se crea la caja de texto para que se ingrese la contraseña del usuario-->
       <div class="form_control">
         <v-text-field
-          v-model="nuevaPassword"
+          v-model="nuevo.passw"
           :error-messages="newPasswordError"
           label="password"
           for="password"
@@ -47,7 +47,7 @@
 
       <!--Se crea el boton para que el usuario indique que ya ingreso toda la información y quiere crear la cuenta-->
       <div class="form_control">
-        <v-btn color="blue" type="submit" class="btn_submit" @click="agregarUsername">Create account</v-btn>
+        <v-btn color="blue" type="submit" class="btn_submit" @click="postRegister">Create account</v-btn>
       </div>
     </form>
 
@@ -64,27 +64,37 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
-import axios from 'axios'
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default {
+
   mixins: [validationMixin],
   validations: {
     nuevaUsername: { required, maxLength: maxLength(30) },
     nuevaEmail: { required, email },
     nuevaPassword: { required }
   },
+
   data: () => ({
     username: [],
     nuevaPassword: "",
     nuevaUsername: "",
-    nuevaEmail: ""
+    nuevaEmail: "",
+
+    nuevo: {
+    name: "",
+    email: "",
+    passw: ""
+  },
   }),
   computed: {
     newUserNameError() {
       const errors = [];
       if (!this.$v.nuevaUsername.$dirty) return errors;
       !this.$v.nuevaUsername.required && errors.push("El nombre es requerido");
-      !this.$v.nuevaUsername.maxLength && errors.push("El nombre debe tener menos de 30 caracteres");
+      !this.$v.nuevaUsername.maxLength &&
+        errors.push("El nombre debe tener menos de 30 caracteres");
       return errors;
     },
     newEmailError() {
@@ -102,10 +112,36 @@ export default {
       return errors;
     }
   },
+  
   //Se ingresan los métodos que van a usar la información qu ingresa el usuario
   methods: {
     submit() {
       this.$v.touch();
+    },
+
+    postRegister() {
+      const path = "http://127.0.0.1:8000/api/registro/nuevos/";
+      axios({
+        method: "post",
+        url: path,
+        data: this.nuevo
+      })
+        .then(response => {
+          console.log(response);
+          Swal.fire({
+            title: "Creado!",
+            type: "success",
+            confirmButtonText: "Volver"
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          Swal.fire({
+            title: "No se pudo completar el registro",
+            type: "error",
+            confirmButtonText: "Volver"
+          });
+        });
     }
   }
 };
