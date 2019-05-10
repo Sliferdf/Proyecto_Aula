@@ -51,7 +51,7 @@
                 <v-layout wrap>
                   <v-flex xs12 sm6 md4>
                     <v-text-field
-                      v-model="name"
+                      v-model="cards.nombre"
                       :rules="[rules.required, rules.counter]"
                       label="Nombre"
                       counter
@@ -60,16 +60,16 @@
                   </v-flex>
 
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="address" :rules="[rules.required]" label="Direccion"></v-text-field>
+                    <v-text-field v-model="cards.direccion" :rules="[rules.required]" label="Direccion"></v-text-field>
                   </v-flex>
 
                   <v-flex xs12 sm6 md4>
-                    <v-text-field v-model="price" :rules="[rules.required]" label="Precio"></v-text-field>
+                    <v-text-field v-model="cards.precio" :rules="[rules.required]" label="Precio"></v-text-field>
                   </v-flex>
 
                   <v-flex xs12 sm6 md4>
                     <v-text-field
-                      v-model="calification"
+                      v-model="cards.calificacion"
                       :rules="[rules.required]"
                       label="Calificacion"
                     ></v-text-field>
@@ -141,19 +141,11 @@ export default {
         counter: value => value.length <= 30 || "Max 30 caracteres"
       },
 
-<<<<<<< HEAD
       headers: [
         {
           align: "left",
           sortable: false,
           value: "nombre"
-=======
-      headers: [{
-        text: 'Nombre',
-        align: 'left',
-        sortable: false,
-        value: 'nombre',
->>>>>>> 31704689604e03e7eb4f1e38f7567875944b177d
         },
         { text: "Nombre", value: "nombre" },
         { text: "Direccion", value: "direccion" },
@@ -164,10 +156,10 @@ export default {
       coworks: [],
 
       cards: {
-        name1: "1234",
-        address1: "1234",
-        price1: "1234",
-        calification1: "1234"
+        nombre: "",
+        direccion: "",
+        precio: "",
+        calificacion: ""
       }
     };
   },
@@ -191,11 +183,11 @@ export default {
 
     postCoworking() {
       const path = "http://127.0.0.1:8000/api/v1.0/sitios/";
-
       axios({
-        method: "post",
-        data: cards
-      })
+      method: 'post',
+      url: path,
+      data: this.cards
+})
         .then(response => {
           console.log(response);
         })
