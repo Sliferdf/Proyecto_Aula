@@ -141,11 +141,19 @@ export default {
         counter: value => value.length <= 30 || "Max 30 caracteres"
       },
 
+<<<<<<< HEAD
       headers: [
         {
           align: "left",
           sortable: false,
           value: "nombre"
+=======
+      headers: [{
+        text: 'Nombre',
+        align: 'left',
+        sortable: false,
+        value: 'nombre',
+>>>>>>> 31704689604e03e7eb4f1e38f7567875944b177d
         },
         { text: "Nombre", value: "nombre" },
         { text: "Direccion", value: "direccion" },
