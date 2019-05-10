@@ -166,7 +166,7 @@ export default {
         required: value => !!value || 'Obligatorio',
         counter: value => value.length <= 30 || 'Max 30 caracteres'
       },
-      
+
       headers: [{
         text: 'Nombre',
         align: 'left',

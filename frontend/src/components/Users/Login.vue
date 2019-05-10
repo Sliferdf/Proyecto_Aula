@@ -89,6 +89,7 @@ export default {
             this.$v.username = ''
             this.$v.password = ''
         },
+        /** 
         login: function (){
             if (this.username == JSON.parse(localStorage.getItem('email')) && this.password== JSON.parse(localStorage.getItem('password'))) {
                  Swal.fire({
@@ -106,15 +107,9 @@ export default {
                     confirmButtonText: 'Reintentar'
                 })
             }
-        },
+        },*/
     },
-    name: 'login',
-    /** data(){
-        return {
-        username: '',            
-        password: '',
-        }
-    }, */
+    name: 'login'
 }
 </script>
 
@@ -146,4 +141,3 @@ h2 {
 }
 
 </style>
-

@@ -107,38 +107,6 @@ export default {
   methods: {
     submit() {
       this.$v.touch();
-    },
-    //Este método se encarga de guardar los elementos en la base de datos local
-    agregarUsername: function() {
-      this.username.push({
-        name: this.nuevaUsername,
-        correo: this.nuevaEmail,
-        pass: this.nuevaPassword
-      });
-      localStorage.setItem("email", JSON.stringify(this.nuevaEmail));
-      localStorage.setItem("password", JSON.stringify(this.nuevaPassword));
-      this.nuevaUsername = "";
-      this.nuevaEmail = "";
-      this.nuevaPassword = "";
-      //Se guardar a los elementos en la base de datos local
-      localStorage.setItem("datos", JSON.stringify(this.username));
-    },
-
-    created: function(index) {
-      var datosUsername = JSON.parse(localStorage.getItem("Username"));
-      var datosEmail = JSON.parse(localStorage.getItem("Email"));
-      var datosPassword = JSON.parse(localStorage.getItem("Password"));
-      if (
-        datosUsername === null ||
-        datosEmail === null ||
-        datosPassword === null
-      ) {
-        this.Username = [];
-        this.Email = [];
-        this.Password = [];
-      } else {
-        this.actividades = datosActividades;
-      }
     }
   }
 };
