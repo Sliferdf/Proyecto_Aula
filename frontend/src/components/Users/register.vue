@@ -60,12 +60,11 @@
   </div>
 </template>
 
-
-
 <!--Modelo para el retorno de los datos guardados, métodos. Todos los códigos correspondientes a JavaScript-->
 <script>
 import { validationMixin } from "vuelidate";
 import { required, maxLength, email } from "vuelidate/lib/validators";
+import axios from 'axios'
 
 export default {
   mixins: [validationMixin],
