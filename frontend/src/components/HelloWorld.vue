@@ -174,7 +174,7 @@ export default {
     },
 
     getCoworkings() {
-      const path = "http://127.0.0.1:8000/api/v1.0/sitios/";
+      const path = "http://127.0.0.1:7000/api/v1.0/sitios/";
       axios
         .get(path)
         .then(response => {
@@ -186,7 +186,7 @@ export default {
     },
 
     postCoworking() {
-      const path = "http://127.0.0.1:8000/api/v1.0/sitios/";
+      const path = "http://127.0.0.1:7000/api/v1.0/sitios/";
       axios({
         method: "post",
         url: path,
