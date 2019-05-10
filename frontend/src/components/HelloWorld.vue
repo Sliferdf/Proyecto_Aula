@@ -55,19 +55,33 @@
             <v-layout wrap>
 
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Nombre"></v-text-field>
+                <v-text-field 
+                v-model="name"
+                :rules="[rules.required, rules.counter]"
+                label="Nombre"
+                counter
+                maxLength="30"></v-text-field>
               </v-flex>
 
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Direccion"></v-text-field>
+                <v-text-field 
+                v-model="address"
+                :rules="[rules.required]"
+                label="Direccion"></v-text-field>
               </v-flex>
 
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Precio"></v-text-field>
+                <v-text-field 
+                v-model="price"
+                :rules="[rules.required]"
+                label="Precio"></v-text-field>
               </v-flex>
 
               <v-flex xs12 sm6 md4>
-                <v-text-field label="Calificacion"></v-text-field>
+                <v-text-field 
+                v-model="calification"
+                :rules="[rules.required]"
+                label="Calificacion"></v-text-field>
               </v-flex>
             <v-combobox
             v-model="chips"
@@ -141,10 +155,18 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      name:"",
+      address:"",
+      price:"",
+      calification:"",
       msg: 'Welcome to Your Coworking Catalog',
       chips: ['Conferencias', 'Cafe', 'Sofá'],
       dialog: false,
-
+      rules: {
+        required: value => !!value || 'Obligatorio',
+        counter: value => value.length <= 30 || 'Max 30 caracteres'
+      },
+      
       headers: [{
         text: 'Nombre',
         align: 'left',
